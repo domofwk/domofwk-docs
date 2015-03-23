@@ -2,7 +2,7 @@
 :author: Christophe Brun <christophe.brun.cl194@gadz.org>
 :event: FHackTory
 :description: Formation
-:data-transition-duration: 1300
+:data-transition-duration: 1400
 :pygments: monokai
 
 ----
@@ -228,3 +228,114 @@ Templating : jinja2
     <h1>Bonjour {{name}}</h1>
 
 * Même appel que app3 = même résultat
+
+----
+
+:id: jinja2_1
+
+Templating : Variable
+=====================
+
+* Utilisation des variables ou résultats de fonction
+
+.. code-block:: jinja
+
+    {{ Variable}}
+    {{ element_dun_dico['cle'] }}
+    {{ valeur_dune_liste[3] }}
+    {{ autre_valeur_dune_liste[num_item] }}
+    {{ objet.function() }}
+
+* Les filtres
+
+.. code-block:: jinja
+    
+    {{ variable|filtre }}
+
+* Avec, par exemple :
+    * **safe** : retourne la valeur sans escaping
+    * **capitalize** : 1ère lettre en majuscule, le reste en minuscule
+    * **lower** : Tt en minuscule
+    * **upper** : Tt en majuscule
+    * **trim** : Suppression des espaces à gauche et à droite
+    * **striptags** : Suppression des balises html
+
+----
+
+:id: jinja2_2
+
+Templating : structures de contrôle
+===================================
+
+* Condition
+
+.. code-block:: jinja
+
+    {% if condition %}
+        condition est vrai
+    {% else %}
+        sinon
+    {% endif %}
+
+* Boucle
+
+.. code-block:: jinja
+
+    {% for item in list %}
+        Code
+    {% endfor %}
+
+----
+
+:id: jinja2_3
+
+Templating : Macros
+===================
+
+* Définition de la macro
+
+.. code-block:: jinja
+
+    {% macro ma_macro %}
+        <li>{{ item }}</li>
+    {% endmacro %}
+
+* Utilisation des macros
+
+.. code-block:: jinja
+    
+    {% for element in ma_list %}
+        {{ macros.ma_macro(elemnt) }}
+    {% endfor %}
+
+----
+
+:id: jinja2_4
+
+Templating : Block
+==================
+
+* Definition d'un block
+ 
+.. code-block:: jinja
+
+    {% block mon_block %}
+        Contenu par defaut du block
+    {% endblock %}
+
+* Surcharge du contenu du block
+
+.. code-block:: jinja
+
+    {% block mon_block %}
+         Mon nouveau contenu
+    {% endblock %}
+
+* Surcharge, en gardant le contenu parent
+
+.. code-block:: jinja
+
+    {% block mon_block %}
+        {{ super }}
+         Mon nouveau contenu
+    {% endblock %}
