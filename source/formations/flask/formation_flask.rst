@@ -339,3 +339,42 @@ Templating : Block
         {{ super }}
          Mon nouveau contenu
     {% endblock %}
+
+----
+
+:id: blueprint_1
+
+Blueprint
+=========
+
+* un **Blueprint** est un package qui permet
+    * de définir des routes (sans avoir à le faire dans l'application)
+    * le découpage de l'application
+    * mutalisation des ressources
+* La structure d'un blueprint est identique à une application complète
+
+* Fichier **mon_module/__init__.py** minimum pour un blueprint
+ 
+.. code-block:: python
+
+    from flask import Blueprint
+
+    module = Blueprint('mon_module', __name__)
+
+    from . import views, error
+
+* Enregistrement du Blueprint dans l'application principale, fichier **__init__.py**:
+ 
+.. code-block:: python
+
+    def create_app(config_name):
+        # ...
+        from .mon_module import mon_module as mon_module_blueprint
+        app.register_blueprint(mon_module_blueprint)
+
+        return app
+
+* Les routes sont relatives au blueprint : http://mon_site/mon_module/*
+* Les erreurs aussi /!\
+
+
